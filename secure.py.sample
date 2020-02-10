@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# @Time    : 20-02-07 下午4:12
+# @Author  : LXFY
+# @Site    : http://paste.fledding.com
+# @File    : secure.py
+# @Software: PyCharm
+
+DEBUG = False
+WTF_CSRF_CHECK_DEFAULT = True
+SERVER_NAME='paste.fledding.com'
+
+SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://user:password@127.0.0.1/SimplePaste'
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+SECRET_KEY = 'P4AcO9DGee'

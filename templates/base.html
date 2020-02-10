@@ -1,0 +1,58 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}SimplePaste|Just another pastebin service!{% endblock %}
+
+{%- block metas %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="SimplePaste"/>
+    <meta name="description" content="SimplePaste, another simple pastebin service with easy-to-type id."/>
+
+{%- endblock metas %}
+
+{% block navbar %}
+    <nav class="navbar navbar-inverse container">
+        <div class="navbar-header"><a class="navbar-brand" href="{{ url_for('show_index') }}">SimplePaste</a></div>
+        <div class="navbar-header"><a class="navbar-brand" href="{{ url_for('show_index') }}">Enter code</a></div>
+        <div class="navbar-header"><a class="navbar-brand" href="{{ url_for('show_index') }}">Add Paste</a></div>
+        <div class="navbar-header"><a class="navbar-brand" href="{{ url_for('show_paste', pid = 1) }}">Help</a></div>
+        <!-- logout links -->
+        {% if current_user.is_authenticated %}
+            <ul class="nav navbar-nav pull-right">
+                <li><a class="btn" href="{{ url_for('logout') }}">Log out</a></li>
+            </ul>
+        {% else %}
+            <ul class="nav navbar-nav pull-right">
+                <li><a class="btn" href="{{ url_for('logout') }}">Log in</a></li>
+            </ul>
+        {% endif %}
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <!-- flash message -->
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">close</span></button>
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <!-- body block -->
+        {% block page_content %} {% endblock %}
+        {% block footer %}
+            <div class="mastfoot">
+                <div class="inner">
+                    <p class="text-muted" align="center">Copyright © LXFY|<a
+                            href="https://github.com/luoxufeiyan/SimplePaste" target="_black">GitHub</a></p>
+                </div>
+            </div>
+        {% endblock footer %}
+    </div>
+{% endblock %}
+
+

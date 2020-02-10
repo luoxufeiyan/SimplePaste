@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Welcome to SimplePaste!</h1>
+            <p>A pastebin website that generates easy-to-read codes.</p>
+            <p><a class="btn btn-primary btn-lg" role="button" href="{{ url_for('show_paste', pid = 1) }}">Feeling
+                lucky!😆</a>
+            </p>
+        </div>
+    </div>
+
+
+    <h2>Enter code</h2>
+    <h3>↪️If you got a code, just enter here.</h3>
+    <form method="POST" action="/">
+    {{ code_form.csrf_token }}
+        <div class="form-group-xs">
+            <div class="col-xs-11">
+                {{ code_form.code(type="text", class="form-control", id="pastecode", placeholder="Enter digit code") }}
+            </div>
+            <div class="col-xs-1">
+                {{ code_form.submit(type="submit", class="btn btn-primary mb-2") }}
+            </div>
+        </div>
+    </form>
+
+<br>
+    <h2>Add a new paste</h2>
+    <h3>✨To create a new paste, paste the text below.</h3>
+    <form method="POST" action="/">
+        {{ content_form.csrf_token }}
+        <div class="col-xs-12">
+            <label for="content">{{ content_form.content.label }}</label>
+            {{ content_form.content(class="form-control", id="content", rows="9")|safe }}
+            <small id="contentHelp" class="form-text text-muted">Your paste content will be visible on the
+                internet. Please do not upload contents that violate the laws of China and the United States.</small>
+        </div>
+        {{ content_form.submit(type="submit", class="btn btn-primary mb-2") }}
+    </form>
+
+
+{% endblock %}

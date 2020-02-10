@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <h2>Paste code</h2>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Paste code</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-xs-2" for="usr">Your paste code is:</label>
+                    <div class="col-xs-10">
+                        <input class=" form-control" type="text" placeholder="{{ pid }}" readonly>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+
+    <h2>View paste</h2>
+
+    <textarea class="form-control" rows="20" readonly>{{ form.content }}</textarea>
+    {#    <input class="form-control" type="text" placeholder= readonly>#}
+    <p></p>
+
+
+{% endblock %}
