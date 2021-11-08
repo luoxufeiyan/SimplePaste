@@ -133,3 +133,5 @@ dmypy.json
 secure.py
 #virtualenv
 bin/
+include/site
+pyvenv.cfg
