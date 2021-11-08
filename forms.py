@@ -19,17 +19,23 @@ class CodeForm(FlaskForm):
 
 class ContentForm(FlaskForm):
     # code = IntegerField('PasteCode', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()], render_kw={"rows": 30, "cols": 15})
+    content = TextAreaField('Content', validators=[DataRequired()], render_kw={
+                            "rows": 30, "cols": 80, "class": "form-control"})
     submit = SubmitField('Submit')
+
 
 class ModifyForm(FlaskForm):
     # code = IntegerField('PasteCode', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()], render_kw={"rows": 30, "cols": 15})
-    status = RadioField('Shown', validators=[DataRequired()], choices=[("1", 'Display'), ("0", 'Hide')], default='1')
+    content = TextAreaField('Content', validators=[DataRequired()], render_kw={
+                            "rows": 30, "cols": 15})
+    status = RadioField('Shown', validators=[DataRequired()], choices=[
+                        ("1", 'Display'), ("0", 'Hide')], default='1')
     submit = SubmitField('Submit')
 
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired(), Length(1, 24)])
-    password = PasswordField('password', validators=[DataRequired(), Length(1, 24)])
+    username = StringField('username', validators=[
+                           DataRequired(), Length(1, 24)])
+    password = PasswordField('password', validators=[
+                             DataRequired(), Length(1, 24)])
     submit = SubmitField('log in')

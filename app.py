@@ -33,14 +33,11 @@ login_manager.login_view = "login"
 # @csrf.exempt
 def show_index():
     content_form = ContentForm()
-    code_form = CodeForm()
+    # code_form = CodeForm()
     if request.method == 'GET':
-        return render_template('index.html', content_form=content_form, code_form=code_form)
+        return render_template('index.html', content_form=content_form)
     else:
-        if code_form.validate_on_submit() and code_form.code:
-            code = code_form.code.data
-            return redirect(url_for('show_paste', pid=code))
-        elif content_form.validate_on_submit() and content_form.content:
+        if content_form.validate_on_submit() and content_form.content:
             NewText = PasteText(0, content_form.content.data, 1)
             db.session.add(NewText)
             db.session.flush()
@@ -51,6 +48,37 @@ def show_index():
         else:
             flash(content_form.errors)
         return redirect(url_for('show_index'))
+
+
+@app.route('/submit', methods=['POST'])
+# @csrf.exempt
+def submit_content():
+    content_form = ContentForm()
+    if content_form.validate_on_submit() and content_form.content:
+        NewText = PasteText(0, content_form.content.data, 1)
+        db.session.add(NewText)
+        db.session.flush()
+        NewPostID = NewText.id
+        db.session.commit()
+        flash('Paste posted! Paste code: ' + str(NewPostID))
+        return redirect((url_for('show_paste', pid=NewPostID)))
+    else:
+        flash(content_form.errors)
+    return redirect(url_for('show_index'))
+
+
+@app.route('/entercode', methods=['GET', 'POST'])
+# @csrf.exempt
+def enter_code():
+    code_form = CodeForm()
+    if request.method == 'GET':
+        return render_template('enter_code.html', code_form=code_form)
+    else:
+        if code_form.validate_on_submit() and code_form.code:
+            return redirect((url_for('show_paste', pid=code_form.code.data)))
+        else:
+            flash(code_form.errors)
+        return redirect(url_for('enter_code'))
 
 
 @app.route('/p/<pid>')
@@ -108,7 +136,8 @@ def change_paste(id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user = User.query.filter_by(username=request.form['username'], password=request.form['password']).first()
+        user = User.query.filter_by(
+            username=request.form['username'], password=request.form['password']).first()
         if user:
             login_user(user)
             flash('you have logged in!')
