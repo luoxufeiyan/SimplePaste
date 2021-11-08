@@ -135,3 +135,6 @@ secure.py
 bin/
 include/site
 pyvenv.cfg
+
+# IDE
+.vscode/settings.json

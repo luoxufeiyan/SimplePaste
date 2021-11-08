@@ -32,6 +32,7 @@ import Database schema:
     mysql -h127.0.0.1 -u DBNAME -pDBPASSWD -DSimplePaste -P3306 < schema.sql
 ```
 
+Default username is: admin/admin
 
 Rename secure.py.sample to secure.py, and change the config.
 
