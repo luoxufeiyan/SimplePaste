@@ -131,3 +131,10 @@ dmypy.json
 
 # For project
 secure.py
+#virtualenv
+bin/
+include/site
+pyvenv.cfg
+
+# IDE
+.vscode/settings.json
